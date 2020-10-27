@@ -72,6 +72,7 @@ public:
 
 class player : public objects {
 protected:
+	bool boost = FALSE;
 	character name;
 	const double j_high = 1.0/9;
 	double j_start = 0;
@@ -81,9 +82,15 @@ protected:
 	double speed;
 	double j_counter = 0; //Sprung-Zeit-Zähler
 public:
+	void set_boost() {
+		this->boost = TRUE;
+	}
+	void reset_boost() {
+		this->boost = FALSE;
+	}
 	void set_name(character name) {
 		this->name = name;
-	};
+	}
 	void do_jump() {
 		this->jump = TRUE;
 	};
@@ -91,38 +98,46 @@ public:
 		this->fall = TRUE;
 	};
 	void flight(double h_underground = 400){
-		if (this->jump && this->j_counter == 0) {
+		if (this->jump && this->j_counter == 0 && !(fall)) {
 			this->j_counter++;
 			this->j_start = this->Position.PosY;
 			this->Position.PosY = this->j_start - (-this->j_high * ((this->j_counter - 30) * (this->j_counter - 30)) + 100);
 		}
-		else if (this->jump && this->j_counter < 30) {
+		else if (!(this->fall) && this->jump && this->j_counter < 30) {
 			this->j_counter++;
 			this->Position.PosY = this->j_start - (-this->j_high * ((this->j_counter - 30) * (this->j_counter - 30))+100);
 		}
-		else if (this->jump && this->j_counter == 30) {
+		else if (!(this->fall) && this->jump && this->j_counter == 30) {
 			this->jump = FALSE;
 			this->fall = TRUE;
 			this->j_counter = 0;
 		}
 
 		if (fall && j_counter == 0 && h_underground > this->Position.PosY) {
+			this->jump = FALSE;
 			this->j_counter++;
 			this->j_start = this->Position.PosY;
 			this->Position.PosY = this->j_start + (this->j_high * (this->j_counter * this->j_counter));
 		}
 		else if (fall && h_underground > this->Position.PosY) {
+			this->jump = FALSE;
 			this->j_counter++;
-			this->Position.PosY = this->j_start + (this->j_high * (this->j_counter * this->j_counter));
+			if ((this->j_start + (this->j_high * (this->j_counter * this->j_counter))) < 400) {
+				this->Position.PosY = this->j_start + (this->j_high * (this->j_counter * this->j_counter));
+			}
+			else {
+				this->Position.PosY = h_underground;
+			}
 		}
 		else if (fall) {
+			this->jump = FALSE;
 			this->fall = FALSE;
 			this->j_counter = 0;
 		}
 		//debug
-		if (fall | jump) {
+		/*if (fall | jump) {
 			std::cout << this->j_counter << " | " << this->Position.PosY << std::endl;
-		}
+		}*/
 	}
 	void set_PosX(double PosX) {
 		this->Position.PosX = PosX;
@@ -134,7 +149,12 @@ public:
 		this->speed = speed;
 	}
 	double get_speed() {
-		return speed;
+		if (this->boost) {
+			return 2 * this->speed;
+		}
+		else {
+			return speed;
+		}
 	};
 	character get_name() {
 		return this->name;

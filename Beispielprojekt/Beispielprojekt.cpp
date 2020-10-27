@@ -14,7 +14,7 @@
 const double DT = 100.0;
 
 character Character = Mario;
-player Figur(Mario, 100, 400, 32);
+player Figur(Mario, 100, 400, 32, 130);
 game_mode mode = menu;
 
 class GameWindow : public Gosu::Window
@@ -41,9 +41,7 @@ public:
 			//Startvorgang
 			break;
 		case running:
-			Gosu::Graphics::draw_rect(
-				0, 400, 800, 200, Gosu::Color::GREEN, 0
-			);
+			Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu::Color::Color(20, 200, 20), 0);
 			bild.draw_rot(
 				Figur.get_PosX(), (Figur.get_PosY() - Figur.get_Radius()), 1, 0, //Position
 				0.5, 0.5,
@@ -61,6 +59,12 @@ public:
 	// Wird 60x pro Sekunde aufgerufen
 	void update() override
 	{
+		if (Gosu::Input::down(Gosu::ButtonName::KB_LEFT_CONTROL)) {
+			Figur.set_boost();
+		}
+		else {
+			Figur.reset_boost();
+		}
 		if (Gosu::Input::down(Gosu::ButtonName::KB_RIGHT)) {
 			//std::cout << "->" << std::endl;
 			Figur.set_PosX(Figur.get_PosX() + Figur.get_speed() / 60);
