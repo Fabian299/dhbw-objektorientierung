@@ -1,9 +1,5 @@
 #pragma once
-#ifndef string
 #include <string>
-#define string
-#endif // !string
-
 typedef enum {menu, start, running, end} game_mode;
 
 typedef enum { Mario, Luigi } character;
