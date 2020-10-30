@@ -1,14 +1,6 @@
-#include "stdafx.h"
-
-#include <Gosu/Gosu.hpp>
-#include <Gosu/AutoLink.hpp>
-
-#include <vector>
-#include <string>
-#include <iostream>
-
 #include "Vektor2d.h"
-#include "Klassen.h"
+#include "objects.h"
+#include "Aufbau.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
@@ -25,7 +17,7 @@ public:
 		: Window(800, 600),
 		bild(Figur.get_picpath())
 	{
-		set_caption("Gosu Tutorial mit Git");
+		set_caption("Fabian and Silas wonderfull Game");
 	}
 
 	// wird bis zu 60x pro Sekunde aufgerufen.
@@ -34,25 +26,28 @@ public:
 	void draw() override
 	{
 		switch (mode) {
-		case menu:
-			//Einstellungen, Score, Spielstart
-			break;
-		case start:
-			//Startvorgang
-			break;
-		case running:
-			Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu::Color::Color(20, 200, 20), 0);
-			bild.draw_rot(
-				Figur.get_PosX(), (Figur.get_PosY() - Figur.get_Radius()), 1, 0, //Position
-				0.5, 0.5,
-				0.1, 0.1 //Skalierung
-			);
-			break;
-		case end:
-			break;
-		default:
-			std::cout << "ERROR: ungueltiger Zustand 'Game_mode'" << std::endl;
-			break;
+			case menu:
+				ablauf_mainmenue();
+				break;
+			case start:
+				// Biler einfügen 3-2-1
+				break;
+			case running:
+				Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu::Color::Color(20, 200, 20), 0);
+				bild.draw_rot(
+					Figur.get_PosX(), (Figur.get_PosY() - Figur.get_Radius()), 1, 0, //Position
+					0.5, 0.5,
+					0.1, 0.1 //Skalierung
+				);
+				break;
+			case end:
+				// Gameover
+				// value speichern
+				// anzeigen des Rankings?
+				break;
+			default:
+				std::cout << "ERROR: ungueltiger Zustand 'Game_mode'" << std::endl;
+				break;
 		}
 	}
 
@@ -84,7 +79,8 @@ public:
 // C++ Hauptprogramm
 int main()
 {
-	mode = running;
-	GameWindow window;
-	window.show();
+	ablauf_start();
+//	mode = running;
+//	GameWindow window;
+//	window.show();
 }
