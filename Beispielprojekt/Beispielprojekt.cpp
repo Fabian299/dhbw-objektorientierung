@@ -1,3 +1,5 @@
+
+#include"stdafx.h"
 #include "Vektor2d.h"
 #include "objects.h"
 #include "Aufbau.h"
