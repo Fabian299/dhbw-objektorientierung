@@ -42,7 +42,7 @@ public:
 					0.1, 0.1 //Skalierung
 				);
 				break;
-			case end:
+			case gameover:
 				// Gameover
 				// value speichern
 				// anzeigen des Rankings?

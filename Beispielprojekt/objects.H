@@ -10,7 +10,7 @@
 
 #pragma once
 //#include <string>
-typedef enum {menu, start, running, end} game_mode;
+typedef enum {menu, start, running, gameover} game_mode;
 
 typedef enum { Mario, Luigi } character;
 
