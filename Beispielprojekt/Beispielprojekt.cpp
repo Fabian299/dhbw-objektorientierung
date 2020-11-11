@@ -10,6 +10,7 @@ const double DT = 100.0;
 character Character = Mario;
 player Figur(Mario, 100, 400, 32, 130);
 game_mode mode = menu;
+uint16_t score = 0;
 
 class GameWindow : public Gosu::Window
 {
@@ -65,6 +66,7 @@ public:
 		if (Gosu::Input::down(Gosu::ButtonName::KB_RIGHT)) {
 			//std::cout << "->" << std::endl;
 			Figur.set_PosX(Figur.get_PosX() + Figur.get_speed() / 60);
+			score++;
 		}
 		if (Gosu::Input::down(Gosu::ButtonName::KB_LEFT)) {
 			//std::cout << "<-" << std::endl;
