@@ -1,11 +1,26 @@
 #include "Aufbau.h"
+#include "stdafx.h"
+#include "objects.H"
 
 using namespace std;
+/*
+int main() {
+	ablauf_start();
+
+	// After game 
+	// /*
+	int value = 3;
+	fkt_after_the_game(value, player_name, ranking_list);
+	// 
+
+}	*/
+
 
 // Globale Variablen
 
-// Überladen des Streamingoperators
-istream& operator>>(istream& stream, rankinglist& rl) {
+// Überladen des Streamingoperators 
+/*
+istream& operator>>(istream& stream, playerscore& rl) {
 	stream >> rl.score;
 	char op;
 	stream >> op;
@@ -14,106 +29,104 @@ istream& operator>>(istream& stream, rankinglist& rl) {
 	// char op2;				// Evtl wenn man in txt auch Iterator haben möchte, als "Ranking" in der txt-Datei
 	// assert(op2 == "\t");
 	return stream;
-}
+} */
 
 
 // int main() {
-	ablauf_start();
-	// rankingsort(rankinglist);
-	// print_ranking(ranking_list);
+// ablauf_start();
+// rankingsort(rankinglist);
+// print_ranking(ranking_list);
 // }
 
 // Funktionsdefinition
-ablauf_start() {
+void ablauf_start() {
 	cout << "Das Spiel wird geöffnet." << endl;
-	ifstream f("Rankinglist.txt");
-	if (f) fkt_init_from_file(vector<playerscore> & a);
-	else 	vector<playerscore> ranking_list = { };
-
+	//	ifstream f("Rankinglist.txt");
+	//	if (f) fkt_init_from_file(ranking_list);
 	cout << "Bitte warten" << endl;
-	_sleep(2);
+	// _sleep(2);
 	cout << "..." << endl;
-	_sleep(2);
+	// _sleep(2);
 	cout << "..." << endl;
-	_sleep(2);
+	// _sleep(2);
 	cout << "Bitte geben Sie ihren Namen ein" << endl;
 	cin >> player_name;
 	// ---------------------
 	ablauf_mainmenue();
 }
 
-ablauf_mainmenue() {
+void ablauf_mainmenue() {
 	enum_ort = mainmenue; // 1
 	fkt_navigation(enum_ort);
 	cout << "With the '1' you can start the game.\nWith the '2' you can change your name." << endl;
 	cout << "With the '3' you can see the best player.\n With the '4' you can change the settings" << endl;
 	cout << "With the '0' you exit the programm. \n\n" << endl;
-	_sleep(1);
+	// _sleep(1);
 	cout << "\n What do you want?" << endl;
 	char eingabe = cin.get();
-	if (eingabe == "1") ablauf_game();
-	if (eingabe == "2") player_name = ablauf_changename();
-	if (eingabe == "3") ablauf_ranking();
-	if (eingabe == "4") ablauf_setting();
-	if (eingabe == "0") ablauf_exit();
+	if (eingabe == '1') ablauf_game();
+	if (eingabe == '2') player_name = ablauf_changename();
+	if (eingabe == '3') ablauf_ranking();
+	if (eingabe == '4') ablauf_setting();
+	if (eingabe == '0') ablauf_exit();
 	else ablauf_mainmenue();
 }
 
-ablauf_game() {
+void ablauf_game() {
 	enum_ort = game; // 2
 	fkt_navigation(enum_ort);
-    mode = running;
-	GameWindow window;
-	window.show();
+	//	mode = running;
+	//	GameWindow window;
+	//	window.show();
 }
 
-ablauf_changename() {
+string ablauf_changename() {
 	enum_ort = changeplayer; // 3
 	fkt_navigation(enum_ort);
 
 	string changed_name;
-	cin << changed_name;
-	if (fkt_check_name(changed_name) ablauf_changename();		// Fehler bei 1 --> Neustart der Seite
+	cin >> changed_name;
+	//	if (fkt_check_name(changed_name)) ablauf_changename();		// Fehler bei 1 --> Neustart der Seite
 
-		cout << "Change successfull" << endl;
-		_sleep(1);
-		return changed_name;
-		// ablauf_mainmenue();	//											-------------??????---------------
+	cout << "Change successfull" << endl;
+	//		_sleep(1);
+	return changed_name;
+	// ablauf_mainmenue();	//											-------------??????---------------
 }
 
-ablauf_ranking() {
+void ablauf_ranking() {
 	enum_ort = ranking; // 4
-		fkt_navigation(enum_ort);
+	fkt_navigation(enum_ort);
 
-		// Zeige den / die beste Spieler an
-		system("pause");
+	fkt_print_ranking(ranking_list);
+	system("pause");
 	ablauf_mainmenue();
 }
 
-ablauf_setting() {
+void ablauf_setting() {
 	enum_ort = setting; // 5
 	fkt_navigation(enum_ort);
 	cout << "Press '1' to reset the rankinglist. Press '2' to change the character.\nPress '0' for exit the settings" << endl;
 
 	char eingabe = cin.get();
-	if (eingabe == "1") fkt_reset_rankinglist();
-	if (eingabe == "2") fkt_change_character();
-	if (eingabe == "0") ablauf_mainmenue();
+	if (eingabe == '1') fkt_reset_rankinglist();
+	if (eingabe == '2') fkt_change_character();
+	if (eingabe == '3') ablauf_mainmenue();
 	else ablauf_setting();
 
 	cout << "\n\n\n!!HIER GEHT NOCH NICHTS" << endl;
 }
 
-ablauf_exit() {
+void ablauf_exit() {
 	cout << "You exit the game. Thank you for using it. We hope we will see you another time.\n" << endl;
 	cout << "Best regard from Fabian and Silas!" << endl;
-	_sleep(1);
-	void exit(					// Programm schließen
-		int const status
-	);
+	// _sleep(1);
+//	void exit(					// Programm schließen
+//		int const status
+//	);
 }
 
-fkt_navigation(int ort) {
+void fkt_navigation(int ort) {
 	system("cls");
 	switch (ort)
 	{
@@ -132,42 +145,44 @@ fkt_navigation(int ort) {
 	}
 }
 
-fkt_check_name(string new_name) {
+/* bool fkt_check_name(string new_name) {
 	for (int i = 0; i < strlen(new_name); i++)
 	{
-		if (new_name[i] == "\t") return true;
+		if (new_name[i] == '\t') return true;
 		else ++i;
 	}
 	return false;
-}
+} */
 
-fkt_reset_rankinglist() {
-	ofstream f("Rankinglist.txt", ios::trunc);		//ios::trunc leert die Datei
+void fkt_reset_rankinglist() {
+	//	ofstream f("Rankinglist.txt", ios::trunc);		//ios::trunc leert die Datei
 	cout << "Rankinglist is reseted" << endl;
 }
 
-fkt_after_the_game(int value, string name, vector<playerscore>& a) {
+void fkt_after_the_game(int value, string name, vector<playerscore>& a) {
 	if (value > a.at(9).score) cout << "You are not in the Top 10" << endl;
 	else {
-		rankingsort(a);
+		fkt_rankingsort(a);
 		if (value == a.at(0).score) cout << "Congratulation. You are the HIGHSCORE !!" << endl;
 		else cout << "Congratulation! You are in the Top 10" << endl;
 		playerscore new_entry = { value, name };				// des evtl schon außerhalb, anderer Name der Fkt..
-		a.push_back(new_entry);		// danach Sortaufruf
+		a.push_back(new_entry);
+		fkt_rankingsort(a);
+		// fkt_update_the_file();
 	}
 
-	while (a.size >= 100) a.pop_back;	// Nur besten 100, schlechter wird gelöscht
+	while (a.size() >= 100) a.pop_back();	// Nur besten 100, schlechter wird gelöscht
 }
 
-fkt_print_ranking(const vector <playerscore>& a)
+void fkt_print_ranking(const vector <playerscore>& a)
 {
 	for (int elem = 1; elem < 11; elem++)
 	{
-		if (elem < a.size) cout << elem << ". Platz\t" << rankinglist.at(elem).name << "\t Score: " << rankinglist.at(elem).score << endl;
+		if (elem < a.size()) cout << elem << ". Platz\t" << ranking_list.at(elem).name << "\t Score: " << ranking_list.at(elem).score << endl;
 	}
 }
 
-fkt_rankingsort(vector <playerscore>& a)
+void fkt_rankingsort(vector <playerscore>& a)
 {
 	bool sorted = false;
 	//n-1 Sortierdurchläufe von n-1 bis 1
@@ -181,7 +196,7 @@ fkt_rankingsort(vector <playerscore>& a)
 			if (a.at(i + 1).score < a.at(i).score)
 			{
 				//Elemente i und i+1 vertauschen
-				int temp = a.at(i);
+				int temp = a.at(i).score;
 				a.at(i).score = a.at(i + 1).score;
 				a.at(i + 1).score = temp;
 				//da Vertauschung notwendig, ist a evtl. noch nicht sortiert
@@ -193,6 +208,7 @@ fkt_rankingsort(vector <playerscore>& a)
 }
 
 // Ranglistenvector aus Textdatei initialisieren --> Am Anfang des Programms (-start)
+/*
 fkt_init_from_file(vector<playerscore>& a) {
 	ifstream f("Rankinglist.txt");
 	if (!f) cout << "Error. Can't open the file." << endl;
@@ -206,31 +222,27 @@ fkt_init_from_file(vector<playerscore>& a) {
 			a.push_back(tmp);
 		}
 	}
-}
+}	*/
 
 // Vector ergänzen bzw kompletter (geordneter) Vector überschreiben.
 
+/*
 void fkt_update_the_file(vector<playerscore>& a) {
-	ofstream f("Rankinglist.txt", ios::trunc);		// Datei leermachen
-	if (!f) cout << "Error. Can't open the file." << endl;
-	else {											// Vector schreiben
+//	ofstream f("Rankinglist.txt", ios::trunc);		// Datei leermachen											// Vector schreiben
 		for (vector<playerscore> vec : a)
 		{
-			/* ostream& operator<<(ostream & stream, const rankingliste &rl) {
-				return stream << k.real << "+" << k.imag << "i";
-			} */
-			f << vec->score << "\t" << vec->name << endl;
+//			f << vec.score << "\t" << vec.name << endl;
 		}
-	}
-}
 
-fkt_change_character() {
-	system.("cls");
+} */
+
+void fkt_change_character() {
+	system("cls");
 	cout << "You want change your character?" << endl;
 	cout << "Press '1' for Mario, Press '2' for Luigi.\nPress '0' to return to the settings." << endl;
 	char eingabe = cin.get();
-	if (eingabe == "1") character = Mario;
-	if (eingabe == "2") character = Luigi;
-	if (eingabe == "0") ablauf_setting();
-	else fkt_change_character();
+	if (eingabe == '1') // character = Mario;
+		if (eingabe == '2') // character = Luigi;
+			if (eingabe == '0') ablauf_setting();
+			else fkt_change_character();
 }
