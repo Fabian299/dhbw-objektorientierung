@@ -7,9 +7,16 @@
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 
+// vector<playerscore> ranking_list = { };
+// string player_name;
+
+// Silas
+std::string a1 = "With the '1' you can start the game. With the '2' you go to the settings. With the '0' you exit the programm. ";
+
+
+
 character Character = Mario;
 player Figur(Mario, 100, 400, 32, 130);
-game_mode mode = menu;
 uint16_t score = 0;
 
 class GameWindow : public Gosu::Window
@@ -17,8 +24,7 @@ class GameWindow : public Gosu::Window
 public:
 	Gosu::Image bild;
 	GameWindow()
-		: Window(800, 600),
-		bild(Figur.get_picpath())
+		: Window(800, 600)
 	{
 		set_caption("Fabian and Silas wonderfull Game");
 	}
@@ -28,30 +34,14 @@ public:
 	// dann werden `draw` Aufrufe ausgelassen und die Framerate sinkt
 	void draw() override
 	{
-		switch (mode) {
-			case menu:
-				ablauf_mainmenue();
-				break;
-			case start:
-				// Biler einfügen 3-2-1
-				break;
-			case running:
-				Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu::Color::Color(20, 200, 20), 0);
-				bild.draw_rot(
-					Figur.get_PosX(), (Figur.get_PosY() - Figur.get_Radius()), 1, 0, //Position
-					0.5, 0.5,
-					0.1, 0.1 //Skalierung
-				);
-				break;
-			case gameover:
-				// Gameover
-				// value speichern
-				// anzeigen des Rankings?
-				break;
-			default:
-				std::cout << "ERROR: ungueltiger Zustand 'Game_mode'" << std::endl;
-				break;
-		}
+		Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu:: Color::Color(20, 200, 20), 0);
+		Figur.draw();
+		//Gosu::Font(string_menü);
+		/*switch (mode) {
+
+			case
+			default
+		}*/
 	}
 
 	// Wird 60x pro Sekunde aufgerufen
@@ -83,7 +73,7 @@ public:
 // C++ Hauptprogramm
 int main()
 {
-	ablauf_start();
+//	ablauf_start();
 //	mode = running;
 //	GameWindow window;
 //	window.show();

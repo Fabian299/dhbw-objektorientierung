@@ -2,7 +2,12 @@
 #include "stdafx.h"
 #include "objects.H"
 
+
 using namespace std;
+
+// Globale Variable
+//typedef enum { mainmenue, game, changeplayer, ranking, setting } enum_ort;
+
 /*
 int main() {
 	ablauf_start();
@@ -32,14 +37,9 @@ istream& operator>>(istream& stream, playerscore& rl) {
 } */
 
 
-// int main() {
-// ablauf_start();
-// rankingsort(rankinglist);
-// print_ranking(ranking_list);
-// }
 
 // Funktionsdefinition
-void ablauf_start() {
+string ablauf_start() {
 	cout << "Das Spiel wird geöffnet." << endl;
 	//	ifstream f("Rankinglist.txt");
 	//	if (f) fkt_init_from_file(ranking_list);
@@ -50,14 +50,16 @@ void ablauf_start() {
 	cout << "..." << endl;
 	// _sleep(2);
 	cout << "Bitte geben Sie ihren Namen ein" << endl;
+	string player_name;
 	cin >> player_name;
+	return player_name;
 	// ---------------------
 	ablauf_mainmenue();
 }
 
 void ablauf_mainmenue() {
-	enum_ort = mainmenue; // 1
-	fkt_navigation(enum_ort);
+	enum_ort Ort = mainmenue; // 1
+	fkt_navigation(Ort);
 	cout << "With the '1' you can start the game.\nWith the '2' you can change your name." << endl;
 	cout << "With the '3' you can see the best player.\n With the '4' you can change the settings" << endl;
 	cout << "With the '0' you exit the programm. \n\n" << endl;
@@ -73,16 +75,16 @@ void ablauf_mainmenue() {
 }
 
 void ablauf_game() {
-	enum_ort = game; // 2
-	fkt_navigation(enum_ort);
-	//	mode = running;
+	enum_ort Ort = game; // 2
+	fkt_navigation(Ort);
+	//	mode = running
 	//	GameWindow window;
 	//	window.show();
 }
 
 string ablauf_changename() {
-	enum_ort = changeplayer; // 3
-	fkt_navigation(enum_ort);
+	enum_ort Ort = changeplayer; // 3
+	fkt_navigation(Ort);
 
 	string changed_name;
 	cin >> changed_name;
@@ -94,9 +96,9 @@ string ablauf_changename() {
 	// ablauf_mainmenue();	//											-------------??????---------------
 }
 
-void ablauf_ranking() {
-	enum_ort = ranking; // 4
-	fkt_navigation(enum_ort);
+void ablauf_ranking(vector<playerscore> ranking_list) {
+	enum_ort Ort = ranking; // 4
+	fkt_navigation(Ort);
 
 	fkt_print_ranking(ranking_list);
 	system("pause");
@@ -104,8 +106,8 @@ void ablauf_ranking() {
 }
 
 void ablauf_setting() {
-	enum_ort = setting; // 5
-	fkt_navigation(enum_ort);
+	enum_ort Ort = setting; // 5
+	fkt_navigation(Ort);
 	cout << "Press '1' to reset the rankinglist. Press '2' to change the character.\nPress '0' for exit the settings" << endl;
 
 	char eingabe = cin.get();
@@ -178,7 +180,7 @@ void fkt_print_ranking(const vector <playerscore>& a)
 {
 	for (int elem = 1; elem < 11; elem++)
 	{
-		if (elem < a.size()) cout << elem << ". Platz\t" << ranking_list.at(elem).name << "\t Score: " << ranking_list.at(elem).score << endl;
+		if (elem < a.size()) cout << elem << ". Platz\t" << a.at(elem).name << "\t Score: " << a.at(elem).score << endl;
 	}
 }
 
@@ -246,3 +248,9 @@ void fkt_change_character() {
 			if (eingabe == '0') ablauf_setting();
 			else fkt_change_character();
 }
+
+void fkt_get_playername() {
+	
+}
+
+

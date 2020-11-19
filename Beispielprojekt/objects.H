@@ -6,12 +6,10 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Aufbau.h"
 
 
 #pragma once
 //#include <string>
-typedef enum {menu, start, running, gameover} game_mode;
 
 typedef enum { Mario, Luigi } character;
 
@@ -33,6 +31,7 @@ protected:
 	position Position;
 	Gosu::Color Farbe;
 public:
+	void draw();
 	void set_Radius(double Radius);
 	double get_Radius();
 	double get_PosX();
@@ -49,6 +48,8 @@ public:
 
 class player : public objects {
 protected:
+	Gosu::Image Pic_Mario;
+	Gosu::Image Pic_Luigi;
 	bool boost = FALSE;
 	bool fall = FALSE;
 	bool jump = FALSE;
@@ -59,6 +60,7 @@ protected:
 	double speed;
 	std::string picpath;
 public:
+	void draw();
 	void set_boost();
 	void reset_boost();
 	void set_name(character name);
@@ -70,8 +72,10 @@ public:
 	void set_speed(double spee);
 	double get_speed();
 	character get_name();
-	std::string get_picpath();
+	//std::string get_picpath();
+
 
 //Konstruktoren
 	player(character name = Mario, double Position_X = 0, double Position_Y = 0, double Radius = 0, double speed = 80);
+	
 };
