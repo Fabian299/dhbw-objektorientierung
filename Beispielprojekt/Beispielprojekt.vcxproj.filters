@@ -36,9 +36,6 @@
     <ClInclude Include="objects.H">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Klassen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
