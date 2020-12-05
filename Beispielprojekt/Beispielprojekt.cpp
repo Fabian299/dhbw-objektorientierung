@@ -17,6 +17,9 @@ void UserinterfaceHM();
 void rankingliste();
 void settingfkt(Settings mySetting);
 
+// Globale Variablen
+std::string myscore[10][2]; 
+
 
 
  character Character = Mario;

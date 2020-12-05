@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <Windows.h>
 #include <string>
+#include "Klassen.h"
 
 using namespace std;
 

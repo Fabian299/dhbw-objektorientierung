@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aufbau.h" />
+    <ClInclude Include="Klassen.h" />
     <ClInclude Include="objects.H" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="stdafx.h" />
