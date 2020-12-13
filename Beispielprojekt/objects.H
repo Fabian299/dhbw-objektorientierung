@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "Aufbau.h"
+//#include "Klassen.h"
 
 
 #pragma once
