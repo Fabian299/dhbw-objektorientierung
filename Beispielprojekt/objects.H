@@ -7,11 +7,9 @@
 #include <string>
 #include <iostream>
 #include "Aufbau.h"
-//#include "Klassen.h"
 
 
 #pragma once
-//#include <string>
 
 typedef enum { Mario, Luigi } character;
 
@@ -33,11 +31,12 @@ protected:
 	position Position;
 	Gosu::Color Farbe;
 public:
-	void draw();
 	void set_Radius(double Radius);
 	double get_Radius();
 	double get_PosX();
 	double get_PosY();
+	void set_PosX(double PosX);
+	void set_PosY(double PosY);
 	void set_color(int rot, int gruen, int blau);
 	void set_color(Gosu::Color Farbe);
 	Gosu::Color get_Farbe();
@@ -50,8 +49,6 @@ public:
 
 class player : public objects {
 protected:
-	Gosu::Image Pic_Mario;
-	Gosu::Image Pic_Luigi;
 	bool boost = FALSE;
 	bool fall = FALSE;
 	bool jump = FALSE;
@@ -62,19 +59,16 @@ protected:
 	double speed;
 	std::string picpath;
 public:
-	void draw();
 	void set_boost();
 	void reset_boost();
 	void set_name(character name);
 	void do_jump();
 	void do_fall();
 	void flight(double h_underground = 400);
-	void set_PosX(double PosX);
-	void set_PosY(double PosY);
 	void set_speed(double spee);
 	double get_speed();
 	character get_name();
-	//std::string get_picpath();
+	std::string get_picpath();
 
 
 //Konstruktoren

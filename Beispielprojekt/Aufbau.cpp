@@ -1,13 +1,10 @@
 
-#include "stdafx.h"
-#include "Aufbau.h"
+//#include "stdafx.h"
+//#include "Aufbau.h"
 
 
 
-using namespace std;
 
-// Globale Variable
-typedef enum { mainmenue, game, changeplayer, ranking, setting } enum_ort;
 
 // Definitionen der Klassenmethode
 void User::set_score(const int s) {

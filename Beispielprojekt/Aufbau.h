@@ -1,5 +1,5 @@
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <iostream>
 #include <thread>
 #include <string>
@@ -10,7 +10,12 @@
 // #include "objects.H"
 // #include "Klassen.h"
 
+#pragma once
+
 using namespace std;
+
+// Globale Variable
+typedef enum { mainmenue, game, changeplayer, ranking, setting } enum_ort;
 
 class User {
 private:

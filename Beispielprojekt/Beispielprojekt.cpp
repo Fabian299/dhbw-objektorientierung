@@ -1,5 +1,4 @@
-
-#include"stdafx.h"
+#include "stdafx.h"
 #include "Vektor2d.h"
 #include "objects.h"
 #include "Aufbau.h"
@@ -25,6 +24,8 @@ std::string myscore[10][2];
 
  character Character = Mario;
  player Figur(Mario, 100, 400, 32, 130);
+ objects Hinderniss(0, 300, 50);
+ uint16_t layer = 400;
  uint16_t score = 0;
 
  class GameWindow : public Gosu::Window
@@ -32,7 +33,8 @@ std::string myscore[10][2];
  public:
  	Gosu::Image bild;
  	GameWindow()
- 		: Window(800, 600)
+ 		: Window(800, 600),
+        bild(Figur.get_picpath())
  	{
  		set_caption("Fabian and Silas wonderfull Game");
  	}
@@ -43,7 +45,11 @@ std::string myscore[10][2];
  	void draw() override
  	{
  		Gosu::Graphics::draw_rect(0, 400, 800, 200, Gosu:: Color::Color(20, 200, 20), 0);
- 		Figur.draw();
+        Gosu::Graphics::draw_rect((600-Hinderniss.get_PosX()), Hinderniss.get_PosY(), Hinderniss.get_Radius(), 200, Gosu::Color::Color(20, 200, 20), 0);
+        bild.draw_rot(Figur.get_PosX(), Figur.get_PosY(), 1, 0, //Position, Layer, angle
+            0.5, 1,      //center
+            0.1, 0.1     //scale
+        );
  		//Gosu::Font(string_menü);
  		/*switch (mode) {
 
@@ -64,7 +70,11 @@ std::string myscore[10][2];
  		if (Gosu::Input::down(Gosu::ButtonName::KB_RIGHT)) {
  			//std::cout << "->" << std::endl;
  			Figur.set_PosX(Figur.get_PosX() + Figur.get_speed() / 60);
- 			score++;
+            if (Figur.get_PosX() == 401) {
+                score++;
+                Hinderniss.set_PosX(Hinderniss.get_PosX() + 1);
+                Figur.set_PosX(400);
+            };
  		}
  		if (Gosu::Input::down(Gosu::ButtonName::KB_LEFT)) {
  			//std::cout << "<-" << std::endl;
@@ -74,7 +84,16 @@ std::string myscore[10][2];
  			//std::cout << "^" << std::endl;
  			Figur.do_jump();
  		}
- 		Figur.flight(400);
+        if (Hinderniss.get_PosX() > 800) {
+            Hinderniss.set_PosX(0);
+        }
+        if (((Figur.get_PosX() + Figur.get_Radius()) > (600 - Hinderniss.get_PosX() - Hinderniss.get_Radius()) && ((Figur.get_PosX() - Figur.get_Radius()) < (600 + Hinderniss.get_PosX() + Hinderniss.get_Radius())) {
+            layer = Hinderniss.get_PosY;
+        }
+        else {
+            layer = 400;
+        }
+ 		Figur.flight(layer);
  	}
  };
 

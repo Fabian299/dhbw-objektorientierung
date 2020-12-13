@@ -9,6 +9,12 @@
 	}
 	void objects::set_Radius(double Radius) {
 		this->Radius = Radius;
+		}
+	void objects::set_PosX(double PosX) {
+		this->Position.PosX = PosX;
+	}
+	void objects::set_PosY(double PosY) {
+		this->Position.PosY = PosY;
 	}
 	Gosu::Color objects::get_Farbe() {
 		return this->Farbe;
@@ -43,20 +49,6 @@
 	}
 
 //Methoden Klasse player
-	void player::draw() {
-		if (this->name == Mario) {
-			this->Pic_Mario.draw_rot(this->PosX, this->PosY, 1, //Position
-				0.5, 1,		// Zentrum
-				0.1, 0.1	// Saklierung
-			);
-		}
-		else if (this->name == Luigi) {
-			this->Pic_Luigi.draw_rot(this->PosX, this->PosY, 1, //Position
-				0.5, 1,		// Zentrum
-				0.1, 0.1	//Skalierung
-			);
-		}
-	}
 	character player::get_name() {
 		return this->name;
 	}
@@ -68,7 +60,7 @@
 			return speed;
 		}
 	}
-/*	std::string player::get_picpath() {
+	std::string player::get_picpath() {
 		switch (name) {
 		case Mario:
 			return "Mario.png";
@@ -82,7 +74,7 @@
 			printf("\nERROR: ungültiger Zustand\n");
 		}
 	}
-	*/
+	
 	void player::do_fall() {
 		this->fall = TRUE;
 	}
@@ -137,12 +129,6 @@
 	void player::set_name(character name) {
 		this->name = name;
 	}
-	void player::set_PosX(double PosX) {
-		this->Position.PosX = PosX;
-	}
-	void player::set_PosY(double PosY) {
-		this->Position.PosY = PosY;
-	}
 	void player::set_speed(double speed) {
 		this->speed = speed;
 	}
@@ -152,7 +138,7 @@
 
 //Konstruktor player
 	player::player(character name = Mario, double Position_X = 0, double Position_Y = 0, double Radius = 0, double speed = 80)
-		: objects(Position_X, Position_Y, Radius), Gosu::Image Pic_Mario("Mario.png"), Gosu::Image Pic_Luigi("Luigi.png") {
+		: objects(Position_X, Position_Y, Radius) {
 		set_name(name);
 		set_speed(speed);
 	}
