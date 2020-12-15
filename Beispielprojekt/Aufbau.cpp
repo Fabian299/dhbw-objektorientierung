@@ -1,6 +1,8 @@
 
-//#include "stdafx.h"
-//#include "Aufbau.h"
+#include "stdafx.h"
+ #include "Aufbau.h"
+// #include "Ufbau_new.h"
+
 
 
 
@@ -13,7 +15,7 @@ void User::set_score(const int s) {
 int User::get_score() {
     return this->score;
 };
-void User::set_name(const std::string n) {
+void User::set_name(const string n) {
     this->player_name = n;
 };
 string User::get_name() {
@@ -30,11 +32,23 @@ int Settings::get_gamespeed() {
 void Settings::set_gamespeed(const int gs) {
     this->gamespeed = gs;
 }
-int Settings::get_victim_color() {
-    return this->victim_color;
+int Settings::get_victim_color_red() {
+    return this->victim_color_red;
 }
-void Settings::set_victim_color(const int vc) {
-    this->victim_color = vc;
+void Settings::set_victim_color_red(const int vcr) {
+    this->victim_color_red = vcr;
+}
+int Settings::get_victim_color_green() {
+    return this->victim_color_green;
+}
+void Settings::set_victim_color_green(const int vcg) {
+    this->victim_color_green = vcg;
+}
+int Settings::get_victim_color_blue() {
+    return this->victim_color_blue;
+}
+void Settings::set_victim_color_blue(const int vcb) {
+    this->victim_color_blue = vcb;
 }
 
 bool Settings::get_charakter() {
@@ -63,9 +77,8 @@ void Settings::set_rankinglist(const int Userscore) {
     }
     else
     {
-        cout <<"You are stupid as fuck" << endl;	// Ausgabe noch freundlich machen
-    }
-    //this->TopTenRanking = TopTen,
+        cout <<"Sorry, you aren't on the Top 10" << endl;
+    this->TopTenRanking = TopTen,
 };
 
 int[10] Settings::get_rankinglist(){

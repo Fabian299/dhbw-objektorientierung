@@ -2,31 +2,32 @@
 #include "Vektor2d.h"
 #include "objects.h"
 #include "Aufbau.h"
+// #include "Ufbau_new.h"
 #include <iostream>
 using namespace std;
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 
-// vector<playerscore> ranking_list = { };
-// string player_name;
+
 
 // Funktionsdeklaration
 void spielstart();
 void UserinterfaceHM();
-void rankingliste();
+// void rankingliste();
 void settingfkt(Settings mySetting);
 Settings mySetting;
+User myUser;
 
 // Globale Variablen
-std::string myscore[10][2]; 
+// std::string myscore[10][2]; 
 
 
 
- character Character = Mario;
- player Figur(Mario, 100, 400, 32, 130);
- objects Hinderniss(0, 300, 50);
- uint16_t layer = 400;
- uint16_t score = 0;
+// character Character = Mario;
+// player Figur(Mario, 100, 400, 32, 130);
+// objects Hinderniss(0, 300, 50);
+// uint16_t layer = 400;
+// uint16_t score = 0;
 
  class GameWindow : public Gosu::Window
  {
@@ -87,7 +88,8 @@ std::string myscore[10][2];
         if (Hinderniss.get_PosX() > 800) {
             Hinderniss.set_PosX(0);
         }
-        if (((Figur.get_PosX() + Figur.get_Radius()) > (600 - Hinderniss.get_PosX() - Hinderniss.get_Radius()) && ((Figur.get_PosX() - Figur.get_Radius()) < (600 + Hinderniss.get_PosX() + Hinderniss.get_Radius())) {
+        if (((Figur.get_PosX() + Figur.get_Radius()) > (600 - Hinderniss.get_PosX() - Hinderniss.get_Radius()) && ((Figur.get_PosX() - Figur.get_Radius()) < (600 + Hinderniss.get_PosX() + Hinderniss.get_Radius())) 
+        {
             layer = Hinderniss.get_PosY;
         }
         else {
@@ -103,12 +105,11 @@ std::string myscore[10][2];
  int main() {
      std::cout << "Hello, World!" << std::endl;
      Settings mySetting;
-     User myUser;
      string eingabe;
      cout << "Hello How you name?" << endl;
      cin >> eingabe;
      myUser.set_name(eingabe);
-     cout << "Dein Name ist: " << myUser.get_name() << endl;
+     cout << "Your name is " << myUser.get_name() << endl;
 
      //Hauptmenü
      // Userinterface: Hauptmenü
@@ -123,54 +124,44 @@ std::string myscore[10][2];
          case '2': cout << "2" << endl; // Settings
              settingfkt(mySetting);
              break;
-         case '3': cout << "3" << endl; // Rankingliste ->  SILAS
-             rankingliste();
-             break;
+//         case '3': cout << "3" << endl; // Rankingliste 
+//             rankingliste();
+//             break;
          case '4':
              return 0;
              break;
          case 'k':
              std::cout << "Easteregg gefunden. Du bist eine coole Socke!" << endl;
          default:
-             cout << "Fehler" << endl;
+             cout << "Error" << endl;
              break;
 
          }
-         cout << mySetting.get_gamespeed() << endl;
-         /*
-         mySetting.set_victim_color(3);
-         std::cout << mySetting.get_victim_color()<<endl;
-         mySetting.set_gamespeed(10000);
-         cout << mySetting.get_gamespeed()<<endl;
-          */
-          //return 0;
      }
      return 0;
  }
 
 
-
-
- //void get_gamespeed();
-
-// void set_gamespeed(const int gs);
- //void get_victim_color();
-
- //void set_victim_color(const int vc);
- //void set_rankinglist(const int Userscore, const char Username);
- //int get_rankinglist();
- //void print_rankinglist();
-
- //void set_score(const int s);
- //void get_score();
- //void set_name(const std::string n);
- //void get_name();
-
 // Funktionendeklaration
  void spielstart() {
-     cout << "Spiel startet. Bitte warten" << endl;
+     cout << "Game start, please wait." << endl;
+
+     Mario = mySetting.get_charakter();
+     player Figur(Mario, 100, 400, 32, 130);
+
+     int red = mySetting.get_victim_color_red();
+     int green = mySetting.get_victim_color_green();
+     int blue = mySetting.get_victim_color_blue();
+     objects Hinderniss(0, 300, 50, red, green, blue);
+
+     uint16_t layer = 400;
+     uint16_t score = 0;
+
      GameWindow window;
      window.show();
+
+     // Nach dem Spiel
+ //    myUser.set_score(hier_score_vom_Fabian);
  }
 
  void settingfkt(Settings mySetting) {
@@ -190,35 +181,43 @@ std::string myscore[10][2];
          cin >> eingabe;
          switch (eingabe) {
          case 1: cout << "1" << endl;
-             std::cout << "Hier kann man die Farbe auswählen" << endl;
-             int farbe;
-             cin >> farbe;
+             int red, green, blue;
+             std::cout << "\t\t_Choose your color" << endl;
+             std::cout << "\t1. red" << endl;
+             std::cin >> red;
+             std::cout << "\t2. green" << endl;
+             std::cin >> green;
+             std::cout << "\t3. blue" << endl;
+             std::cin >> blue;
+
              mySetting.set_victim_color(farbe);
-             std::cout << mySetting.get_victim_color() << endl;
+
+             mySetting.set_victim_color(farbe);
+             std::cout << "The color is " << mySetting.get_victim_color() << endl;
              break;
          case 2: cout << "2" << endl;
-             std::cout << "Hier kann man die Gamespeed auswählen" << endl;
+             std::cout << "Choose your gamespeed" << endl;
              int gamespeed;
              cin >> gamespeed;
              mySetting.set_gamespeed(gamespeed);
-             cout << mySetting.get_gamespeed() << endl;
+             cout << "The gamespeed is " << mySetting.get_gamespeed() << endl;
              break;
          case 3: cout << "3" << endl;
-             std::cout << "Luigi = 0, Mario = 1" << endl;
+             std::cout << "Mario = 0, Luigi = 1" << endl;
              bool Luigi;
              cin >> Luigi;
              mySetting.set_charakter(Luigi);
              cout << mySetting.get_charakter() << endl;
              break;
-         case 4: cout << "3" << endl; // Exitback
+         case 4: cout << "Return to Mainmenue" << endl; // Exitback
              setOpt = false;
              break;
          }
      }
  };
- void rankingliste() {
- std:cout << "Hier soll die Rankingliste ausgegeben werden" << endl;
- };
+ // void rankingliste() {
+ // std:cout << "Hier soll die Rankingliste ausgegeben werden" << endl;
+ // };
 
  void UserinterfaceHM() {
      cout << endl;
@@ -226,17 +225,9 @@ std::string myscore[10][2];
      cout << "\t \t _MENU " << endl;
      cout << "\t 1. PLAY" << endl;
      cout << "\t 2. SETTINGS" << endl;
-     cout << "\t 3. RANKING LIST" << endl;
+//     cout << "\t 3. RANKING LIST" << endl;
      cout << "\t 4. EXIT" << endl;
      cout << endl;
      cout << "Select an item number and confirm with the enter key" << endl;
-     //cout << "With '1' you can start the game.\nWith  '2' Settings." << endl;
-     //cout << "With '3' you can see the best player. " << endl;
-     //cout << "With '0' you exit the programm. \n" << endl;
  }
-
-
-
- // // Silas
- // std::string a1 = "With the '1' you can start the game. With the '2' you go to the settings. With the '0' you exit the programm. ";
 

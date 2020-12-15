@@ -14,8 +14,7 @@
 
 using namespace std;
 
-// Globale Variable
-typedef enum { mainmenue, game, changeplayer, ranking, setting } enum_ort;
+
 
 class User {
 private:
@@ -39,30 +38,36 @@ public:
 class Settings {
 private:
     int gamespeed;
-    int victim_color;
+    int victim_color_red;
+    int victim_color_green;
+    int victim_color_blue;
     bool character; // 0 - Mario, 1- Luigi
     //int TopTenRanking[10];
     //string TopTenPlayer[10];
 public:
     Settings() {	// Konstruktor
         gamespeed = 10;
-        victim_color = 2;
+        victim_color_red = 255;
+        victim_color_green = 0;
+        victim_color_blue = 0;
         character = 0;
-        //TopTenRanking= { 0,0,0,0,0,0,0,0,0,0 };
-        //TopTenPlayer={"Silas", "Fabse", "Silas", "Fabse", "Silas", "Fabse","Silas", "Fabse", "Silas", "Fabse"};
     };
     ~Settings() {};
 
     int get_gamespeed();
     void set_gamespeed(const int gs);
-    int get_victim_color();
-    void set_victim_color(const int vc);
+    int get_victim_color_red();
+    void set_victim_color_red(const int vcr);
+    int get_victim_color_green();
+    void set_victim_color_green(const int vcg);
+    int get_victim_color_blue();
+    void set_victim_color_blue(const int vcb);
+
+
     void set_charakter(bool charakter);
     bool get_charakter();
 
-    //void set_rankinglist(const int Userscore, const char Username);
-    //int get_rankinglist();
-    //void print_rankinglist();
+
 
 
 };
