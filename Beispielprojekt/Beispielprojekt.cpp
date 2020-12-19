@@ -24,9 +24,9 @@ User myUser;
 
 
 // character Character = Mario;
-// player Figur(Mario, 100, 400, 32, 130);
-// objects Hinderniss(0, 300, 50);
-// uint16_t layer = 400;
+ player Figur(Mario, 100, 400, 32, 130);
+ objects Hinderniss(0, 300, 50);
+ uint16_t layer = 400;
 // uint16_t score = 0;
 
  class GameWindow : public Gosu::Window
@@ -72,7 +72,7 @@ User myUser;
  			//std::cout << "->" << std::endl;
  			Figur.set_PosX(Figur.get_PosX() + Figur.get_speed() / 60);
             if (Figur.get_PosX() == 401) {
-                score++;
+                //score++;
                 Hinderniss.set_PosX(Hinderniss.get_PosX() + 1);
                 Figur.set_PosX(400);
             };
@@ -88,9 +88,9 @@ User myUser;
         if (Hinderniss.get_PosX() > 800) {
             Hinderniss.set_PosX(0);
         }
-        if (((Figur.get_PosX() + Figur.get_Radius()) > (600 - Hinderniss.get_PosX() - Hinderniss.get_Radius()) && ((Figur.get_PosX() - Figur.get_Radius()) < (600 + Hinderniss.get_PosX() + Hinderniss.get_Radius())) 
+        if (((Figur.get_PosX() + Figur.get_Radius()) > (600 - Hinderniss.get_PosX() - Hinderniss.get_Radius())) && ((Figur.get_PosX() - Figur.get_Radius()) < (600 + Hinderniss.get_PosX() + Hinderniss.get_Radius()))) 
         {
-            layer = Hinderniss.get_PosY;
+            layer = Hinderniss.get_PosY();
         }
         else {
             layer = 400;
@@ -146,8 +146,13 @@ User myUser;
  void spielstart() {
      cout << "Game start, please wait." << endl;
 
-     Mario = mySetting.get_charakter();
-     player Figur(Mario, 100, 400, 32, 130);
+     bool luigi = mySetting.get_charakter();
+     if (luigi) {
+         Figur.set_name(Luigi);
+     }
+     else {
+         Figur.set_name(Mario);
+     }
 
      int red = mySetting.get_victim_color_red();
      int green = mySetting.get_victim_color_green();
@@ -190,10 +195,10 @@ User myUser;
              std::cout << "\t3. blue" << endl;
              std::cin >> blue;
 
-             mySetting.set_victim_color(farbe);
-
-             mySetting.set_victim_color(farbe);
-             std::cout << "The color is " << mySetting.get_victim_color() << endl;
+             mySetting.set_victim_color_red(red);
+             mySetting.set_victim_color_green(green);
+             mySetting.set_victim_color_blue(blue);
+             
              break;
          case 2: cout << "2" << endl;
              std::cout << "Choose your gamespeed" << endl;

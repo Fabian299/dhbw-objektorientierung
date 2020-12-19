@@ -27,13 +27,13 @@
     <ClInclude Include="Planet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vektor2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Aufbau.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="objects.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vektor2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,9 +45,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Planet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vektor2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Aufbau.cpp">
