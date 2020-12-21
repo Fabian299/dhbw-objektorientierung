@@ -50,7 +50,7 @@ public:
         victim_color_red = 255;
         victim_color_green = 0;
         victim_color_blue = 0;
-        character = 0;
+        character = false;
     };
     ~Settings() {};
 

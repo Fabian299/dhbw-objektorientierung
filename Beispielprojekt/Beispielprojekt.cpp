@@ -127,9 +127,6 @@ User myUser;
 //         case '3': cout << "3" << endl; // Rankingliste 
 //             rankingliste();
 //             break;
-         case '4':
-             return 0;
-             break;
          case 'k':
              std::cout << "Easteregg gefunden. Du bist eine coole Socke!" << endl;
          default:
